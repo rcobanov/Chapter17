@@ -1,6 +1,7 @@
 package se.hkr.Task12;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class Main {
@@ -15,9 +16,21 @@ public class Main {
                 new Invoice(56,"Jig saw", 21, 11.00),
                 new Invoice(3, "Wrench", 34, 7.50)
         };
-        Stream<Invoice> stream = Arrays.stream(invObjects);
-        //17.12.1
-        stream.forEach(System.out::println);
+        //17.12.1 view the objects
+        System.out.println(" --------------- 17.12.1 ------------");
+        Arrays.stream(invObjects).forEach(System.out::println);
+        System.out.println(" --------------- 17.12.2 ------------");
+        //17.12.2 Using Streams to sort the objects by priceItem and then display result
+        Arrays.stream(invObjects)
+                .sorted(Comparator.comparing(Invoice::getPrice))
+                .forEach(System.out::println);
 
+        //17.12.3 Map invoice object to description and quantity, sorting by quantity
+       Arrays.stream(invObjects)
+               .sorted(Comparator.comparing(Invoice::getQuantity))
+               .map(invObject -> String.format(
+                       "Description: %-15s     Quantity: %d",
+                       invObject.getPartDescription(), invObject.getQuantity()))
+               .forEach(System.out::println);
     }
 }
