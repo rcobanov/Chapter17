@@ -34,12 +34,28 @@ public class Main {
                .forEach(System.out::println);
 
        //17.12.4 Map invoice to part description and the value of the invoice (quantity*priceperItem), order by inv value
-
+        System.out.println("----------- 17.12.4 -----------");
         Arrays.stream(invObjects)
                 .sorted(Comparator.comparing(invValue -> invValue.getPrice() * invValue.getQuantity()))
                 .map(invValue -> String.format(
                         "Description: %-15s  Invoice amount: %7.2f",
                         invValue.getPartDescription(), (invValue.getPrice() * invValue.getQuantity())))
+                .forEach(System.out::println);
+
+
+        // 17.12.5 Modify 12.4 to select the invoice values in the range of 200 to 500
+        System.out.println("----------- 17.12.5 -----------");
+        Arrays.stream(invObjects)
+                .filter(inv -> inv.getPrice() * inv.getQuantity() >= 200 && inv.getPrice() * inv.getQuantity() <= 500)
+                .sorted(Comparator.comparing(inv -> inv.getPrice()* inv.getQuantity()))
+                .map(invValue -> String.format(
+                        "Description: %-15s  Invoice amount: %7.2f",
+                        invValue.getPartDescription(), (invValue.getPrice() * invValue.getQuantity())))
+                .forEach(System.out::println);
+        // 17.12.6 Find any invoice where the part descriptipn contains saw
+        System.out.println("----------- 17.12.6 -----------");
+        Arrays.stream(invObjects)
+                .filter(inv -> inv.getPartDescription().contains("saw"))
                 .forEach(System.out::println);
     }
 }
