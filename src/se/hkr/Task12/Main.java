@@ -32,5 +32,14 @@ public class Main {
                        "Description: %-15s     Quantity: %d",
                        invObject.getPartDescription(), invObject.getQuantity()))
                .forEach(System.out::println);
+
+       //17.12.4 Map invoice to part description and the value of the invoice (quantity*priceperItem), order by inv value
+
+        Arrays.stream(invObjects)
+                .sorted(Comparator.comparing(invValue -> invValue.getPrice() * invValue.getQuantity()))
+                .map(invValue -> String.format(
+                        "Description: %-15s  Invoice amount: %7.2f",
+                        invValue.getPartDescription(), (invValue.getPrice() * invValue.getQuantity())))
+                .forEach(System.out::println);
     }
 }
