@@ -9,6 +9,8 @@ public class DoubleParameters {
         //17.6.1
         Arithmetic multiply = (a, b) -> a * b;
         System.out.println(multiply.operations(10.5, 5.5));
+        //17.6.2
+
     }
 
 }
